@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -15,9 +16,14 @@ type TabItem = {
 type CustomTabsProps = {
   tabs: TabItem[];
   defaultValue?: string;
+  isFullWidth?: boolean;
 };
 
-const CustomTabs: React.FC<CustomTabsProps> = ({ tabs, defaultValue }) => {
+const CustomTabs: React.FC<CustomTabsProps> = ({
+  tabs,
+  defaultValue,
+  isFullWidth,
+}) => {
   const [value, setValue] = React.useState(
     defaultValue || tabs[0]?.value || ""
   );
@@ -46,7 +52,12 @@ const CustomTabs: React.FC<CustomTabsProps> = ({ tabs, defaultValue }) => {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="custom tabs">
             {tabs.map((tab) => (
-              <Tab key={tab.value} label={tab.label} value={tab.value} />
+              <Tab
+                className={isFullWidth ? "w-[50%]" : ""}
+                key={tab.value}
+                label={tab.label}
+                value={tab.value}
+              />
             ))}
           </TabList>
         </Box>

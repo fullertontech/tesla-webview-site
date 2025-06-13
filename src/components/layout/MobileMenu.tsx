@@ -1,34 +1,36 @@
+const menuList = [
+  {
+    name: "訂單資料",
+    link: "/orders",
+  },
+  {
+    name: "優惠券",
+    link: "/coupons",
+  },
+  {
+    name: "會員中心",
+    link: "/memberCenter",
+  },
+  {
+    name: "商品列表",
+    link: "/products",
+  },
+  {
+    name: "最新消息",
+    link: "/news",
+  },
+  {
+    name: "客服中心",
+    link: "/faq",
+  },
+];
+
+
 export default function MobileMenu({
   onCloseMenu,
 }: {
   onCloseMenu: () => void;
 }) {
-  const menuList = [
-    {
-      name: "訂單資料",
-      link: "/orders",
-    },
-    {
-      name: "優惠券",
-      link: "/coupons",
-    },
-    {
-      name: "會員中心",
-      link: "/memberCenter",
-    },
-    {
-      name: "商品列表",
-      link: "/products",
-    },
-    {
-      name: "最新消息",
-      link: "/news",
-    },
-    {
-      name: "客服中心",
-      link: "/faq",
-    },
-  ];
 
   return (
     <div className="z-[3] w-[100vw] pt-[20px] h-[100vh] gap-[24px] fixed left-0 top-0 flex flex-col bg-[white]">
