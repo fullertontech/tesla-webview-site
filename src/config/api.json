@@ -1,0 +1,17 @@
+{
+  "beta": {
+    "teslaAPIaddress": "https://beta-api2.idealcard.com.tw",
+    "memberAPIAddress": "http://beta-api-member-local.idealcard.com.tw",
+    "keycloakAPIAddress": "https://beta-login.idealcard.com.tw"
+  },
+  "development": {
+    "teslaAPIaddress": "https://beta-api2.idealcard.com.tw",
+    "memberAPIAddress": "http://beta-api-member-local.idealcard.com.tw",
+    "keycloakAPIAddress": "https://beta-login.idealcard.com.tw"
+  },
+  "production": {
+    "teslaAPIaddress": "https://api2.idealcard.com.tw",
+    "memberAPIAddress": "http://member-local.idealcard.com.tw",
+    "keycloakAPIAddress": "https://login.idealcard.com.tw"
+  }
+}
