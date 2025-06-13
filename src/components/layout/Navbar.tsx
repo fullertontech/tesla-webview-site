@@ -1,6 +1,11 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <div className="flex items-center justify-between bg-white py-[10px] px-[7px] ">
       <Image
@@ -21,7 +26,11 @@ export default function Navbar() {
           width="32"
           height="32"
           alt="__"
+          onClick={() => {
+            setShowMenu((isShow) => !isShow);
+          }}
         />
+        {showMenu && <MobileMenu onCloseMenu={() => setShowMenu(false)} />}
       </div>
     </div>
   );

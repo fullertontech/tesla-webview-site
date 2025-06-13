@@ -66,20 +66,22 @@ export default function QAList() {
                   <span className="text-[#00BCD3] mr-[10px]">Q</span>
                   <span
                     className={`${
-                      isOpen ? "text-[#51ADBC]" : "text-[#1A1A1A]"
+                      isOpen ? "text-[#00BCD3]" : "text-[#1A1A1A]"
                     }`}
                   >
                     {qa.title}
                   </span>
                 </span>
-                <div className="text-[28px] leading-[24px]">{isOpen ? "－" : "＋"}</div>
+                <div className="text-[28px] leading-[24px]">
+                  {isOpen ? "－" : "＋"}
+                </div>
               </div>
             </MuiAccordionSummary>
             <MuiAccordionDetails
               className={`${
                 isMobile ? "px-4" : "pl-[70px] pr-[80px]"
               } font-medium text-[#1A1A1A] text-[16px] md:text-[20px] ${
-                expanded ? "" : "border-t border-gray-300"
+                expanded ? "" : "border-t border-[#D3D3D3]"
               }`}
             >
               <div dangerouslySetInnerHTML={{ __html: qa.content }}></div>
