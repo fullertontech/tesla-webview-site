@@ -1,4 +1,4 @@
-import { apiClient } from "./base";
+import { apiClient, TeslaAPIResultData } from "./base";
 
 export type CouponData = {
   coupon_code: string;
@@ -18,15 +18,14 @@ type CouponResultData = {
   total_unused: number;
 };
 
-type TeslaAPIResultData<T> = {
-  code: string;
-  message: string;
-  result: T;
-};
+export enum CouponType {
+  預付卡優惠券 = 1,
+  其他優惠券 = 2,
+}
 
 export const getMemberCoupons: (
   page: number,
-  type: number
+  type: CouponType
 ) => Promise<TeslaAPIResultData<CouponResultData>> = (page, type) => {
   return apiClient.get(
     `/api/tesla-API/member/coupon?page=${page}&page_size=99&type=${type}`
