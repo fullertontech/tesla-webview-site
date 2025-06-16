@@ -9,7 +9,6 @@ export async function GET(
   req: NextRequest,
   context: { params: { slug: string[] } }
 ) {
-  // const { searchParams } = new URL(req.url);
   const searchParams = req.nextUrl.searchParams;
   const queryString = searchParams.toString();
   const { params } = await context;
@@ -38,9 +37,10 @@ export async function GET(
 }
 
 export async function POST(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const path = searchParams.get("path");
-  const token = req.headers.get("access_token");
+  // const { searchParams } = new URL(req.url);
+  // const path = searchParams.get("path");
+  // console.log();
+  const token = req.headers.get("x-ftc-authorization");
 
   if (!token) {
     return NextResponse.json(
@@ -52,14 +52,57 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
 
   try {
-    const res = await fetch(`${BASE_URL}/tesla-API/${path}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    });
+    console.log(`${BASE_URL}/tesla-API/${req.url.split("/tesla-API/")[1]}`);
+    const res = await fetch(
+      `${BASE_URL}/tesla-API/${req.url.split("/tesla-API/")[1]}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-ftc-authorization": token,
+          "x-ftcsys-key": TESLA_KEY,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+
+    const data = await res.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
+}
+
+export async function PUT(req: NextRequest) {
+  // const { searchParams } = new URL(req.url);
+  // const path = searchParams.get("path");
+  // console.log();
+  const token = req.headers.get("x-ftc-authorization");
+  console.log({ token });
+
+  if (!token) {
+    return NextResponse.json(
+      { error: "Access token missing" },
+      { status: 401 }
+    );
+  }
+
+  const body = await req.json();
+
+  try {
+    console.log(`${BASE_URL}/tesla-API/${req.url.split("/tesla-API/")[1]}`);
+    const res = await fetch(
+      `${BASE_URL}/tesla-API/${req.url.split("/tesla-API/")[1]}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          "x-ftc-authorization": token,
+          "x-ftcsys-key": TESLA_KEY,
+        },
+        body: JSON.stringify(body),
+      }
+    );
 
     const data = await res.json();
     return NextResponse.json(data);
