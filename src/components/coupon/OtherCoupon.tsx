@@ -7,8 +7,6 @@ import { CouponStatus } from "@/app/coupons/page";
 
 export default function OtherCoupon() {
   const [tab, setTab] = useState(1);
-  // const [page, setPage] = useState(1);
-  // const [couponData, setCouponData] = useState<CouponResultData | undefined>();
   const page = 1;
 
   const { data, isLoading, isError } = useQuery({
