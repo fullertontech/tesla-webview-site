@@ -11,16 +11,30 @@ export interface I_Customized_Accordions_Props {
   qaList: Array<{ id: string; title: string; content: string }>;
 }
 
-const QuestionTypes = ({ questionTypes }: { questionTypes: Array<string> }) => {
+const QuestionTypes = ({
+  questionTypes,
+  onClickQType,
+  current = "",
+}: {
+  questionTypes: Array<string>;
+  onClickQType: (qType: string) => void;
+  current?: string;
+}) => {
   return (
-    <div>
+    <div className="my-[10px]">
       {questionTypes.map((qType, idx) => (
         <div
           className={
-            "my-[10px] w-[calc(50%-2px)] py-[14px] text-center rounded-[7.35px] border-[1px] border-[#D3D3D3] inline-block " +
-            (idx % 2 == 0 ? "mr-[2px]" : "ml-[2px]")
+            "ease-in duration-300 w-[calc(50%-2px)] py-[14px] text-center rounded-[7.35px] border-[1px]  inline-block " +
+            (idx % 2 == 0 ? "mr-[2px] " : "ml-[2px] ") +
+            (current === qType
+              ? "border-[#00CCE4] text-[#00CCE4] bg-[#F1F3FF]"
+              : "border-[#D3D3D3]")
           }
           key={qType}
+          onClick={() => {
+            onClickQType(qType);
+          }}
         >
           {qType}
         </div>
@@ -31,24 +45,31 @@ const QuestionTypes = ({ questionTypes }: { questionTypes: Array<string> }) => {
 
 export default function QAList() {
   const [expanded, setExpanded] = React.useState<string | false>(false);
-  const [qaList, setQAList] = React.useState<
+  const [qaData, setQAData] = React.useState<
     Array<{
-      answer: string;
-      question: string;
+      data_list: Array<{
+        answer: string;
+        question: string;
+      }>;
+      question_type: string;
     }>
   >([]);
   const [qaTypes, setQATypes] = React.useState<Array<string>>([]);
+  const [curQType, setCurQType] = React.useState<string>();
   const isMobile = useMediaQuery("(max-width:767px)");
   const { data } = useQuery({
     queryKey: ["qaList"],
     queryFn: () => getQAList(),
     staleTime: 1000 * 60 * 10,
   });
+  const qaList =
+    qaData?.find((d) => d.question_type == curQType)?.data_list || [];
 
   React.useEffect(() => {
     if (data?.result && data.result.length > 0) {
-      setQAList(data?.result[0].data_list);
+      setQAData(data?.result);
       setQATypes(data?.result.map((d) => d.question_type));
+      setCurQType(data?.result.map((d) => d.question_type)[0]);
     }
   }, [data]);
 
@@ -59,8 +80,16 @@ export default function QAList() {
 
   return (
     <>
-      {<QuestionTypes questionTypes={qaTypes} />}
-      {qaList?.map((qa, idx) => {
+      {
+        <QuestionTypes
+          questionTypes={qaTypes}
+          current={curQType}
+          onClickQType={(qType) => {
+            setCurQType(qType);
+          }}
+        />
+      }
+      {qaList.map((qa, idx) => {
         const currentPanel = `panel${idx + 1}`;
         const isOpen = expanded === currentPanel;
 
@@ -75,16 +104,12 @@ export default function QAList() {
             className={`w-full max-w-[1200px] border-b border-[#D3D3D3] font-["Noto_Sans_TC"] ${
               isOpen ? "bg-white" : "bg-transparent"
             }`}
+            sx={idx === 0 ? { "&::before": { display: "none" } } : {}}
           >
             <MuiAccordionSummary
               aria-controls={`${currentPanel}d-content`}
               id={`${currentPanel}d-header`}
               className="p-0! flex-row-reverse [&>.MuiAccordionSummary-content]:py-5"
-              sx={{
-                "&::before": {
-                  display: "none",
-                },
-              }}
             >
               <div
                 className={`flex w-full justify-between ${
@@ -105,8 +130,13 @@ export default function QAList() {
                     {qa.question}
                   </span>
                 </span>
-                <div className="text-[28px] leading-[24px]">
-                  {isOpen ? "－" : "＋"}
+                <div
+                  className={
+                    "text-[28px] leading-[24px]" +
+                    (isOpen ? " rotate-45 text-[#00BCD3]" : "")
+                  }
+                >
+                  {"＋"}
                 </div>
               </div>
             </MuiAccordionSummary>
