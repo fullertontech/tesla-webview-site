@@ -43,7 +43,7 @@ const QuestionTypes = ({
   );
 };
 
-export default function QAList() {
+export default function QAList({ showTab }: { showTab?: boolean }) {
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const [qaData, setQAData] = React.useState<
     Array<{
@@ -80,7 +80,7 @@ export default function QAList() {
 
   return (
     <>
-      {
+      {showTab && (
         <QuestionTypes
           questionTypes={qaTypes}
           current={curQType}
@@ -88,11 +88,10 @@ export default function QAList() {
             setCurQType(qType);
           }}
         />
-      }
+      )}
       {qaList.map((qa, idx) => {
         const currentPanel = `panel${idx + 1}`;
         const isOpen = expanded === currentPanel;
-
         return (
           <MuiAccordion
             key={idx}
@@ -123,7 +122,7 @@ export default function QAList() {
                 >
                   <span className="text-[#00BCD3] mr-[10px]">Q</span>
                   <span
-                    className={`${
+                    className={"text-[18px] "+`${
                       isOpen ? "text-[#00BCD3]" : "text-[#1A1A1A]"
                     }`}
                   >

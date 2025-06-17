@@ -16,7 +16,6 @@ export default function MemberInfo() {
     onSuccess: (res) => {
       console.log("更新成功", res.result);
       refetch();
-      //   location.reload();
     },
     onError: (err) => {
       console.error("更新失敗", err);
