@@ -36,8 +36,8 @@ importers:
         specifier: ^19.0.0
         version: 19.1.0(react@19.1.0)
       swiper:
-        specifier: ^9.4.1
-        version: 9.4.1
+        specifier: 11.2.8
+        version: 11.2.8
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -1989,9 +1989,6 @@ packages:
     resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
 
-  ssr-window@4.0.2:
-    resolution: {integrity: sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==}
-
   stable-hash@0.0.5:
     resolution: {integrity: sha512-+L3ccpzibovGXFK+Ap/f8LOS0ahMrHTf3xu7mMLSpEGU0EO9ucaysSylKo9eRDFNhWve/y275iPmIZ4z39a9iA==}
 
@@ -2058,8 +2055,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  swiper@9.4.1:
-    resolution: {integrity: sha512-1nT2T8EzUpZ0FagEqaN/YAhRj33F2x/lN6cyB0/xoYJDMf8KwTFT3hMOeoB8Tg4o3+P/CKqskP+WX0Df046fqA==}
+  swiper@11.2.8:
+    resolution: {integrity: sha512-S5FVf6zWynPWooi7pJ7lZhSUe2snTzqLuUzbd5h5PHUOhzgvW0bLKBd2wv0ixn6/5o9vwc/IkQT74CRcLJQzeg==}
     engines: {node: '>= 4.7.0'}
 
   tailwindcss@4.1.10:
@@ -4265,8 +4262,6 @@ snapshots:
 
   source-map@0.5.7: {}
 
-  ssr-window@4.0.2: {}
-
   stable-hash@0.0.5: {}
 
   stop-iteration-iterator@1.1.0:
@@ -4343,9 +4338,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swiper@9.4.1:
-    dependencies:
-      ssr-window: 4.0.2
+  swiper@11.2.8: {}
 
   tailwindcss@4.1.10: {}
 
