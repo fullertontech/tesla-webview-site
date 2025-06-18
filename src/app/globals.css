@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.featureMenu .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    width: 12px;
+    border-radius: 16px;
+}
