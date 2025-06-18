@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -23,18 +23,20 @@ export default function ImageCarousel({
 }) {
   const swiperRef = useRef<any>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [btnWidth, setBtnWidth] = useState(0);
 
-  
+  useEffect(() => {
+    if (imageList.length == 0) return;
+    setBtnWidth((window.innerWidth - 30) / imageList.length);
+  }, [imageList]);
+
   const goToSlide = (index: number) => {
     swiperRef.current?.slideToLoop(index, 1000, false);
   };
 
   const getDotClass = (idx) => {
     return (
-      "h-[2px] w-[" +
-      (100 / imageList.length).toFixed(0) +
-      "%]" +
-      (idx === activeIndex ? " bg-[#98E000]" : " bg-gray-300")
+      "h-[2px] " + (idx === activeIndex ? " bg-[#98E000]" : " bg-gray-300")
     );
   };
 
@@ -54,7 +56,7 @@ export default function ImageCarousel({
         }}
       >
         {imageList.map((img, idx) => (
-          <SwiperSlide key={idx} className="max-h-[300px]">
+          <SwiperSlide key={idx} className="max-h-[288px]">
             <Image
               className="w-[calc(100vw-30px)] h-[auto]"
               src={img.src}
@@ -68,7 +70,10 @@ export default function ImageCarousel({
       {/* 點點點控制區 */}
       <div className="flex justify-center mt-[8px] space-x-2">
         {imageList.map((_, idx) => (
-          <button
+          <div
+            style={{
+              width: btnWidth - 5 + "px",
+            }}
             key={idx}
             onClick={() => goToSlide(idx)}
             className={getDotClass(idx)}
