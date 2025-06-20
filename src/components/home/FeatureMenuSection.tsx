@@ -103,7 +103,6 @@ function Menu() {
   //todo:
   function generateMenuPages(menuItems) {
     const divideMenuItemsByTen = chunkArray(menuItems, 10);
-    console.log(divideMenuItemsByTen);
     return (
       <>
         {divideMenuItemsByTen.map((itemsList, idx) => {

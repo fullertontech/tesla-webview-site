@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import QueryProvider from "@/components/QueryProvider";
-// import { Geist, Geist_Mono } from "next/font/google";
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
+import EmotionRegistry from "@/components/EmotionRegistry";
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export const metadata: Metadata = {
   title: "中華電信 - 如意卡",
@@ -28,9 +20,11 @@ export default function RootLayout({
       // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          <div className=" max-w-[400px] mx-auto overflow-x-hidden">
-            {children}
-          </div>
+          <EmotionRegistry>
+            <div className=" max-w-[400px] mx-auto overflow-x-hidden">
+              {children}
+            </div>
+          </EmotionRegistry>
         </QueryProvider>
       </body>
     </html>
